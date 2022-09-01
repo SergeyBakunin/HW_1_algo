@@ -1,15 +1,113 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HW_1_algo
+namespace AlgoHW1
 {
-    internal class Program
+    class Program
     {
+        static uint FibStd(uint n)
+        {
+            uint a0 = 0;
+            uint a1 = 1;
+            uint a = a1;
+            for (int i = 2; i <= n; i++)
+            {
+                a = a0 + a1;
+                a0 = a1;
+                a1 = a;
+            }
+            return a1;
+        }
+
+        static uint FibRec(uint n)
+        {
+            if (n == 0) return 0;
+            if (n == 1) return 1;
+            return FibRec(n - 1) + FibRec(n - 2);
+        }
+
+
         static void Main(string[] args)
         {
+            try
+            {
+                Part_One();
+                Console.WriteLine("");
+                Console.WriteLine("--------------------------------------");
+                Console.WriteLine("Второе задание");
+                Console.WriteLine("--------------------------------------");
+                Console.WriteLine("Фибоначчи (стандартное вычисление)");
+            mark1:
+                Console.Write("Введите число для стандартного вычисления: ");
+                if (uint.TryParse(Console.ReadLine(), out uint number))
+                {
+                    Console.WriteLine("Фибоначчи от введённого числа: " + FibStd(number));
+                }
+                else
+                {
+                    goto mark1;
+                }
+            mark2:
+                Console.WriteLine("Фибоначчи (рекурсивное вычисление)");
+                Console.Write("Введите число для рекурсивного вычисления: ");
+                if (uint.TryParse(Console.ReadLine(), out uint number2))
+                {
+                    Console.WriteLine("Фибоначчи от введённого числа (рекурсивно): " + FibRec(number2));
+                }
+                else
+                {
+                    goto mark2;
+                }
+
+                Console.ReadKey(true);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ошибка: " + e.Message);
+            }
+        }
+        static void Part_One()
+        {
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("Первое задание");
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("Определение простых и составных чисел");
+            Console.Write("Введите число: ");
+            uint n = uint.Parse(Console.ReadLine());
+            uint d = 0;
+            uint i = 2;
+        mark3:
+
+            if (i < n)
+            {
+                if (n % i == 0)
+                {
+                    d++;
+                    goto mark4;
+
+                }
+                else
+                {
+                    goto mark4;
+                }
+            mark4:
+
+                {
+
+                    i++;
+                    goto mark3;
+                }
+            }
+            else
+            {
+                if (d == 0)
+                {
+                    Console.WriteLine("Простое");
+                }
+                else
+                {
+                    Console.WriteLine("Не простое");
+                }
+            }
         }
     }
 }
